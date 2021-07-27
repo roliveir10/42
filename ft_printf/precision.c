@@ -33,6 +33,12 @@ static char	*precision(t_occurrence *occ, int offset)
 {
 	char	*str;
 
+	if (occ->zero == 0 && occ->precision == 0)
+	{
+		ft_strdel(&occ->value);
+		occ->value = (char *)ft_calloc(1, sizeof(char));
+		return (occ->value);
+	}
 	if (offset < 1)
 		return (occ->value);
 	str = (char *)ft_calloc(offset + 1, sizeof(char));
