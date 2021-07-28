@@ -7,10 +7,10 @@ char	*pper(char *s)
 
 char	*ptypec(void *s, char *zero)
 {
-	char	c;
-	char	*str;
+	unsigned char	c;
+	char			*str;
 
-	c = (char)s;
+	c = (unsigned char)s;
 	*zero = c;
 	str = (char *)ft_calloc(2, sizeof(char));
 	if (!str)
