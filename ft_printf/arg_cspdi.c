@@ -25,7 +25,10 @@ char	*ptypes(void *s, char *zero)
 	char	*str;
 
 	(void)zero;
-	str = ft_strdup((char *)s);
+	if (!s)
+		str = ft_strdup("(null)\n");
+	else
+		str = ft_strdup((char *)s);
 	return (str);
 }
 
