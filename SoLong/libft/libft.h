@@ -5,6 +5,12 @@
 
 # define BUFF_SIZE 4096000
 
+typedef struct s_point2d
+{
+	int	x;
+	int	y;
+}	t_point2d;
+
 int				ft_atoi(const char *str);
 int				ft_atoip(const char *str, int *i);
 int				ft_atoi_base(const char *str, const char *base);

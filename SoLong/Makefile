@@ -10,7 +10,13 @@ INC_LINK = -I $(INC_LIBFT) -I $(INC_DIR) -I $(INC_MLX)
 SRC_DIR = srcs
 SRC =	main.c						\
 		solong_manager.c			\
-		solong_map.c
+		solong_map.c				\
+		solong_display.c			\
+		solong_mlx.c				\
+		solong_event.c				\
+		solong_player.c				\
+		solong_consomable.c			\
+		solong_gameover.c
 
 INC_DIR = includes
 INC_MLX = minilibx
