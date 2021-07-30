@@ -8,6 +8,7 @@ int	solong_close(void *d)
 	env = (t_env *)d;
 	solong_mlx_destroy(&env->mlx);
 	ft_strdel(&env->map.map);
+	ft_list_clear(&env->game.ennemy, &ennemy_clear_list);
 	exit(0);
 	return (0);
 }

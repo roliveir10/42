@@ -5,7 +5,7 @@
 
 # define WIN_TITLE "SoLong"
 # define SCREENX_MAX 1600
-# define SCREENY_MAX 1600
+# define SCREENY_MAX 1000
 
 typedef enum e_event
 {
@@ -41,19 +41,29 @@ typedef struct s_mlx
 	t_img			img;
 }	t_mlx;
 
+typedef struct s_ennemy
+{
+	int				dir;
+	int				pos;
+	int				move;
+}	t_ennemy;
+
 typedef struct s_player
 {
 	int				pos;
 }	t_player;
 
-# define MAP_CHAR "01CEP"
-# define MAP_CHAR_MAX 5
+# define MAP_CHAR "01CEP|-"
+# define MAP_CHAR_MAX 7
 
 # define PLAYER 'P'
 # define END 'E'
 # define CONSO 'C'
 # define EMPTY '0'
 # define WALL '1'
+# define ENVER '|'
+# define ENHOR '-'
+
 
 typedef struct s_map
 {
@@ -67,6 +77,7 @@ typedef struct s_game
 	int				conso;
 	int				pos_end;
 	int				win;
+	t_list			*ennemy;
 	int				lose;
 }	t_game;
 
@@ -75,13 +86,12 @@ typedef struct s_env
 	t_game			game;
 	t_map			map;
 	t_player		p;
-//	t_conso			*c;
 	t_mlx			mlx;
 }	t_env;
 
 int		so_long(char *file);
 char	*file_to_map(char *file, int *width, int *height);
-void	solong_display(t_mlx *mlx, t_map *map);//, t_player p);//, t_conso *c);
+void	solong_display(t_mlx *mlx, t_map *map);
 void	exit_solong(int error, char *file, char *error_msg, void **data);
 
 /*
@@ -92,17 +102,26 @@ int		player_move(t_env *env, int keycode);
 int		player_valid_in_map(t_player *p, t_map *map);
 
 /*
+** ENNEMY
+*/
+
+t_list	*ennemy_list(t_map *map);
+void	ennemy_clear_list(void *data);
+void	ennemy_move(t_env *env);
+
+/*
 ** CONSO
 */
 
 int		conso_total(char *map);
-int		end_point2d(t_map *map);
+int		end_point2d(int *pos_end, t_map *map);
 
 /*
 ** GAMEOVER
 */
 
 void	game_win(void *d);
+void	game_over(void *d);
 
 /*
 **	MLX

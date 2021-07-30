@@ -4,7 +4,7 @@ static int	player_check_move(t_map *map, int newpos)
 {
 	if (newpos < 0 || newpos >= map->size.x * map->size.y)
 		return (-1);
-	if (ft_strchr("0CE", map->map[newpos]))
+	if (ft_strchr("0CE-|", map->map[newpos]))
 		return (1);
 	return (-1);
 }
@@ -15,6 +15,8 @@ static void	player_update_game(t_map *map, t_game *game, t_player *p)
 		game->conso--;
 	if (map->map[p->pos] == END && game->conso == 0)
 		game->win = 1;
+	if (map->map[p->pos] == ENVER || map->map[p->pos] == ENHOR)
+		game->lose = 1;
 	game->move++;
 	ft_putnbrl(game->move);
 	map->map[p->pos] = PLAYER;
@@ -41,6 +43,9 @@ int	player_move(t_env *env, int keycode)
 	player_update_game(&env->map, &env->game, &env->p);
 	if (env->game.win == 1)
 		game_win((void *)env);
+	if (env->game.lose == 1)
+		game_over((void *)env);
+	ennemy_move(env);
 	solong_display(&env->mlx, &env->map);
 	return (1);
 }

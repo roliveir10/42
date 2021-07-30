@@ -3,8 +3,9 @@
 
 static int	solong_map_texture(char *map, int map_tile)
 {
-	const int	color[MAP_CHAR_MAX] = {0x096b41, 0xffffff, 0xe4d113, 0x144628, 0xcc3b56};
-	const char	map_char[MAP_CHAR_MAX] = "01CEP";
+	const int	color[MAP_CHAR_MAX] = {0x096b41, 0xffffff, 0xe4d113, 0x144628,
+		0xcc3b56, 0x282814, 0x282814};
+	const char	map_char[MAP_CHAR_MAX] = "01CEP-|";
 	int			i;
 
 	i = -1;

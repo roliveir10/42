@@ -1,17 +1,22 @@
 #include "solong.h"
 
-int	end_point2d(t_map *map)
+int	end_point2d(int *pos_end, t_map *map)
 {
 	int			i;
+	int			end;
 
 	i = 0;
+	end = 0;
 	while (map->map[i])
 	{
 		if (map->map[i] == END)
-			return ((i / map->size.x) * map->size.x + i % map->size.x);
+		{
+			end++;
+			*pos_end = (i / map->size.x) * map->size.x + i % map->size.x;
+		}
 		i++;
 	}
-	return (0);
+	return (end == 1);
 }
 
 int	conso_total(char *map)

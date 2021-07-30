@@ -16,7 +16,8 @@ SRC =	main.c						\
 		solong_event.c				\
 		solong_player.c				\
 		solong_consomable.c			\
-		solong_gameover.c
+		solong_gameover.c			\
+		solong_ennemy.c
 
 INC_DIR = includes
 INC_MLX = minilibx
