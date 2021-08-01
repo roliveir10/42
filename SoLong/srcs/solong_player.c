@@ -18,7 +18,6 @@ static void	player_update_game(t_map *map, t_game *game, t_player *p)
 	if (map->map[p->pos] == ENVER || map->map[p->pos] == ENHOR)
 		game->lose = 1;
 	game->move++;
-	ft_putnbrl(game->move);
 	map->map[p->pos] = PLAYER;
 }
 
@@ -46,7 +45,7 @@ int	player_move(t_env *env, int keycode)
 	if (env->game.lose == 1)
 		game_over((void *)env);
 	ennemy_move(env);
-	solong_display(&env->mlx, &env->map);
+	solong_display(env);
 	return (1);
 }
 

@@ -1,7 +1,7 @@
 #include "mlx.h"
 #include "solong.h"
 
-static int	solong_map_texture(char *map, int map_tile)
+/*static int	solong_map_texture(char *map, int map_tile)
 {
 	const int	color[MAP_CHAR_MAX] = {0x096b41, 0xffffff, 0xe4d113, 0x144628,
 		0xcc3b56, 0x282814, 0x282814};
@@ -14,7 +14,7 @@ static int	solong_map_texture(char *map, int map_tile)
 			return (color[i]);
 	return (0xffffff);
 }
-
+*/
 static int	pix_to_tile(int pos, t_point2d map_size, t_point2d screen)
 {
 	int	tile_x;
@@ -25,19 +25,40 @@ static int	pix_to_tile(int pos, t_point2d map_size, t_point2d screen)
 	return (tile_y * map_size.x + tile_x);
 }
 
-void	solong_display(t_mlx *mlx, t_map *map)
+static void	display_move_count(t_mlx *mlx, int move_count)
+{
+	char	*str;
+	char	*tmp;
+
+	tmp = ft_itoa(move_count);
+	if (!tmp)
+		return ;
+	str = ft_strjoin("Move count: ", tmp);
+	if (str)
+		mlx_string_put(mlx->mlx, mlx->win, 15, 15,
+			COUNT_MOVE_COLOR, str);
+	ft_strdel(&tmp);
+	if (str)
+		ft_strdel(&str);
+}
+
+#include <stdio.h>
+
+void	solong_display(t_env *env)
 {
 	int		pix_i;
 	int		map_tile;
 	int		color;
 
 	pix_i = 0;
-	while (pix_i < mlx->screen.x * mlx->screen.y)
+	while (pix_i < env->mlx.screen.x * env->mlx.screen.y)
 	{
-		map_tile = pix_to_tile(pix_i, map->size, mlx->screen);
-		color = solong_map_texture(map->map, map_tile);
-		solong_img_write(&mlx->img, pix_i % mlx->screen.x, pix_i / mlx->screen.x, color);
+		map_tile = pix_to_tile(pix_i, env->map.size, env->mlx.screen);
+		color = pix_to_textures(env, env->map.map[map_tile], pix_i);
+		solong_img_write(&env->mlx.img, pix_i % env->mlx.screen.x,
+				pix_i / env->mlx.screen.x, color);
 		pix_i++;
 	}
-	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.img, 0, 0);
+	mlx_put_image_to_window(env->mlx.mlx, env->mlx.win, env->mlx.img.img, 0, 0);
+	display_move_count(&env->mlx, env->game.move);
 }
