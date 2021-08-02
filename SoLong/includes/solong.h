@@ -105,6 +105,14 @@ void			solong_display(t_env *env);
 void			exit_solong(int error, char *file, char *error_msg, void **data);
 
 /*
+**	TILES
+*/
+
+t_point2d		point2d_to_pos(t_point2d p, t_point2d size);
+t_point2d		pos_to_point2d(int pos, t_point2d size);
+int				pix_to_tile(int pos, t_point2d size, t_point2d screen);
+
+/*
 ** PLAYER
 */
 

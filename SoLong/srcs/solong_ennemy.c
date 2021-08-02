@@ -10,7 +10,7 @@ t_list	*ennemy_list(t_map *map)
 {
 	t_list		*new;
 	t_ennemy	*e;
-	int		i;
+	int			i;
 
 	i = 0;
 	new = NULL;
@@ -65,13 +65,11 @@ void	ennemy_move(t_env *env)
 	int			ret;
 
 	list = env->game.ennemy;
-	ppos.x = env->p.pos % env->map.size.x;
-	ppos.y = env->p.pos / env->map.size.x;
+	ppos = pos_to_point2d(env->p.pos, env->map.size);
 	while (list)
 	{
 		e = (t_ennemy *)list->data;
-		epos.x = e->pos % env->map.size.x;
-		epos.y = e->pos / env->map.size.x;
+		epos = pos_to_point2d(e->pos, env->map.size);
 		ret = ennemy_move_direction(&env->map, e->pos + e->move, e);
 		if (ret == 0)
 		{

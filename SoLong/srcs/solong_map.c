@@ -77,7 +77,7 @@ static char	*map_validity(char **map, char *file, int width, int height)
 	while (++i < width * height)
 		bit_char |= lst_char[(unsigned char)(*map)[i]];
 	if (bit_char != 7)
-		exit_solong(0, file, "map must have at least [C] [E] [P]\n", (void **)map);
+		exit_solong(0, file, "map must have at least [CEP]\n", (void **)map);
 	return (*map);
 }
 

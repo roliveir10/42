@@ -25,23 +25,26 @@ static void	set_up_win_size(t_mlx *mlx, t_point2d map_size)
 	mlx->screen.y = map_size.y * ratio;
 }
 
-#include <stdio.h>
 static void	so_long_setup(char *file, t_env *env)
 {
 	set_up_win_size(&env->mlx, env->map.size);
 	if (env->map.map == NULL)
 		exit_solong(errno, file, NULL, NULL);
 	if (player_valid_in_map(&env->p, &env->map) == 0)
-		exit_solong(0, file, "too many players in map\n", (void **)&env->map.map);
+		exit_solong(0, file, "too many players in map\n",
+			(void **)&env->map.map);
 	env->game.conso = conso_total(env->map.map);
 	if (end_point2d(&env->game.pos_end, &env->map) == 0)
-		exit_solong(0, file, "too many end in map\n", (void **)&env->map.map);
+		exit_solong(0, file, "too many end in map\n",
+			(void **)&env->map.map);
 	if (solong_mlx_initialize(&env->mlx) == 0)
-		exit_solong(0, file, "mlx failed to run program\n", (void **)&env->map.map);
+		exit_solong(0, file, "mlx failed to run program\n",
+			(void **)&env->map.map);
 	if (textures_load(&env->mlx, env->t) == 0)
 	{
 		solong_mlx_destroy(&env->mlx);
-		exit_solong(0, file, "failed to load textures\n", (void **)&env->map.map);
+		exit_solong(0, file, "failed to load textures\n",
+			(void **)&env->map.map);
 	}
 	env->game.ennemy = ennemy_list(&env->map);
 }
